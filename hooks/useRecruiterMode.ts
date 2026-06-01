@@ -1,13 +1,35 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  ReactNode,
+  createElement,
+} from "react";
 
-export function useRecruiterMode() {
-  const [isRecruiterMode, setIsRecruiterMode] = useState(false);
+export type RecruiterRoleId = "ai-engineer" | "data-scientist" | "ml-researcher";
 
-  const enable = useCallback(() => setIsRecruiterMode(true), []);
-  const disable = useCallback(() => setIsRecruiterMode(false), []);
-  const toggle = useCallback(() => setIsRecruiterMode((prev) => !prev), []);
+interface RecruiterModeState {
+  activeRole: RecruiterRoleId;
+  setActiveRole: (role: RecruiterRoleId) => void;
+}
 
-  return { isRecruiterMode, enable, disable, toggle };
+const RecruiterModeContext = createContext<RecruiterModeState | null>(null);
+
+export function RecruiterModeProvider({ children }: { children: ReactNode }) {
+  const [activeRole, setActiveRole] = useState<RecruiterRoleId>("ai-engineer");
+
+  return createElement(
+    RecruiterModeContext.Provider,
+    { value: { activeRole, setActiveRole } },
+    children
+  );
+}
+
+export function useRecruiterMode(): RecruiterModeState {
+  const ctx = useContext(RecruiterModeContext);
+  if (!ctx)
+    throw new Error("useRecruiterMode must be used inside RecruiterModeProvider");
+  return ctx;
 }

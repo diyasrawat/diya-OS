@@ -1,43 +1,32 @@
-import { TimelineEntry } from "@/lib/types";
+import { TimelineEvent } from "@/lib/types";
 
-export const timeline: TimelineEntry[] = [
+export const timeline: TimelineEvent[] = [
   {
-    id: "btech",
-    date: "2022 – Present",
-    title: "B.Tech — Artificial Intelligence & Data Science",
-    description:
-      "Pursuing undergraduate studies with focus on ML, deep learning, and data science.",
-    type: "education",
+    id: "hackindia",
+    date: "MARCH 2024",
+    title: "HackIndia Winner",
+    description: "1st Place for AI-driven agricultural predictive model.",
+    color: "primary",
   },
   {
-    id: "vein-project",
-    date: "2024",
-    title: "Vein Detection System",
-    description:
-      "Built a computer-vision pipeline for non-invasive vein detection using NIR imaging.",
-    type: "project",
-  },
-  {
-    id: "cloudy-hackathon",
-    date: "2024",
-    title: "Cloudy ML Hackathon",
-    description:
-      "Competed in a cloud-ML hackathon, delivering an end-to-end model pipeline.",
-    type: "achievement",
-  },
-  {
-    id: "heart-failure",
-    date: "2024",
-    title: "Heart Failure Prediction — 90.5% CV Score",
-    description:
-      "Achieved top cross-validation scores using ensemble methods on clinical data.",
-    type: "achievement",
+    id: "aws-cert",
+    date: "JANUARY 2024",
+    title: "AWS ML Specialty",
+    description: "Completed professional certification in machine learning workloads.",
+    color: "secondary",
   },
   {
     id: "iit-hackathon",
-    date: "2024",
+    date: "NOVEMBER 2023",
     title: "IIT Kharagpur Hackathon",
-    description: "Participated in an inter-college AI/ML hackathon.",
-    type: "achievement",
+    description: "Participated in inter-college AI/ML hackathon, reaching final round.",
+    color: "tertiary",
+  },
+  {
+    id: "btech",
+    date: "AUGUST 2022",
+    title: "B.Tech — AI & Data Science",
+    description: "Began undergraduate studies with focus on ML, deep learning, and data science.",
+    color: "primary",
   },
 ];

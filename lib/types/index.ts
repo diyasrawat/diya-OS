@@ -3,32 +3,51 @@ export interface Project {
   title: string;
   description: string;
   tags: string[];
+  imageGradient: string;
   githubUrl?: string;
   liveUrl?: string;
   featured: boolean;
   status: "completed" | "in-progress" | "archived";
   year: number;
+  summary: {
+    problem: string;
+    solution: string;
+    tech: string;
+    keyLearning: string;
+  };
 }
 
-export interface Skill {
+export interface StackItem {
   name: string;
-  category: "ml" | "frontend" | "backend" | "data" | "tools";
-  level: "beginner" | "intermediate" | "advanced";
+  percent: number;
+  color: "primary" | "secondary" | "tertiary";
 }
 
-export interface TimelineEntry {
+export interface TimelineEvent {
   id: string;
   date: string;
   title: string;
   description: string;
-  type: "education" | "project" | "achievement" | "work";
+  color: "primary" | "secondary" | "tertiary";
 }
 
-export interface RecruiterConfig {
-  roles: string[];
-  highlights: string[];
-  availability: string;
-  preferredContact: string;
+export interface FocusItem {
+  id: string;
+  icon: string;
+  label: string;
+  content: string;
+  accentColor: "primary" | "secondary" | "tertiary";
+}
+
+export interface RecruiterRole {
+  id: string;
+  title: string;
+  icon: string;
+  description: string;
+  coreSkills: { category: string; name: string; percent: number }[];
+  tags: string[];
+  matchedProjectIds: string[];
+  insightQA: { question: string; answer: string }[];
 }
 
 export interface ChatMessage {

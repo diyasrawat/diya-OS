@@ -1,20 +1,24 @@
 import MainLayout from "@/components/layout/MainLayout";
 import Hero from "@/components/sections/Hero";
-import CurrentFocus from "@/components/sections/CurrentFocus";
-import GithubIntelligence from "@/components/sections/GithubIntelligence";
-import FeaturedProjects from "@/components/sections/FeaturedProjects";
+import CurrentlyBuilding from "@/components/sections/CurrentlyBuilding";
+import GitHubIntelligence from "@/components/sections/GithubIntelligence";
+import FeaturedWork from "@/components/sections/FeaturedWork";
+import RecruiterModeTeaser from "@/components/sections/RecruiterModeTeaser";
 import LivingCV from "@/components/sections/LivingCV";
 import Contact from "@/components/sections/Contact";
 
 export default function Home() {
   return (
     <MainLayout>
-      <Hero />
-      <CurrentFocus />
-      <GithubIntelligence />
-      <FeaturedProjects />
-      <LivingCV />
-      <Contact />
+      <div className="max-w-[1280px] mx-auto">
+        <Hero />
+        <CurrentlyBuilding />
+        <GitHubIntelligence />
+        <FeaturedWork />
+        <RecruiterModeTeaser />
+        <LivingCV />
+        <Contact />
+      </div>
     </MainLayout>
   );
 }
