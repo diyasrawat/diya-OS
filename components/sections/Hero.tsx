@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useDiyaAI } from "@/hooks/useDiyaAI";
+import SafeButton from "@/components/ui/SafeButton";
 
 export default function Hero() {
   const { setIsPanelOpen } = useDiyaAI();
@@ -31,7 +32,7 @@ export default function Hero() {
           transition={{ delay: 0.25, duration: 0.5 }}
           className="flex flex-col sm:flex-row gap-4 mt-8"
         >
-          <button
+          <SafeButton
             onClick={() => setIsPanelOpen(true)}
             className="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md text-label-md hover:opacity-90 transition-opacity flex items-center gap-2"
           >
@@ -42,7 +43,7 @@ export default function Hero() {
               smart_toy
             </span>
             Talk to Diya AI
-          </button>
+          </SafeButton>
           <Link
             href="/recruiter"
             className="border border-outline text-on-surface px-8 py-4 rounded-full font-label-md text-label-md hover:bg-white/5 transition-colors flex items-center justify-center"

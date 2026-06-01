@@ -2,6 +2,8 @@
 
 import { useRef, useEffect } from "react";
 import { useDiyaAI } from "@/hooks/useDiyaAI";
+import SafeInput from "@/components/ui/SafeInput";
+import SafeButton from "@/components/ui/SafeButton";
 
 const QUICK_PROMPTS = [
   "What are your strongest skills?",
@@ -117,14 +119,14 @@ export default function DiyaAIPanel() {
             {i === 0 && messages.length === 1 && m.role === "assistant" && (
               <div className="mt-4 space-y-2 pl-10">
                 {QUICK_PROMPTS.map((q) => (
-                  <button
+                  <SafeButton
                     key={q}
                     disabled={isStreaming}
                     onClick={() => sendMessage(q)}
                     className="w-full text-left px-4 py-2.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-all disabled:opacity-40"
                   >
                     {q}
-                  </button>
+                  </SafeButton>
                 ))}
               </div>
             )}
@@ -156,7 +158,7 @@ export default function DiyaAIPanel() {
       {/* Input */}
       <div className="p-4 border-t border-white/10 bg-surface-container-low shrink-0">
         <div className="relative flex items-center">
-          <input
+          <SafeInput
             className="w-full bg-surface-container-highest rounded-full px-5 py-3 font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-1 focus:ring-primary border-none pr-20 disabled:opacity-60"
             placeholder={isStreaming ? "Diya AI is thinking…" : "Ask Diya AI anything…"}
             value={input}
@@ -165,19 +167,19 @@ export default function DiyaAIPanel() {
             onKeyDown={(e) => e.key === "Enter" && !e.shiftKey && handleSend()}
           />
           <div className="absolute right-2 flex gap-1">
-            <button
+            <SafeButton
               className="p-2 text-on-surface-variant hover:text-primary transition-colors"
               disabled={isStreaming}
             >
               <span className="material-symbols-outlined text-[20px]">mic</span>
-            </button>
-            <button
+            </SafeButton>
+            <SafeButton
               onClick={handleSend}
               disabled={isStreaming || !input.trim()}
               className="p-2 text-primary disabled:opacity-40 transition-opacity"
             >
               <span className="material-symbols-outlined text-[20px]">send</span>
-            </button>
+            </SafeButton>
           </div>
         </div>
       </div>

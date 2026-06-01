@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { workExperience, WorkEntry } from "@/lib/data/experience";
+import { workExperience as defaultWorkExperience, WorkEntry } from "@/lib/data/experience";
+import { useAdminData } from "@/hooks/useAdminData";
 
 // ── Duration helper ───────────────────────────────────────────────────────────
 
@@ -129,6 +130,7 @@ interface WorkExperienceProps {
 }
 
 export default function WorkExperience({ heading = "Work Experience" }: WorkExperienceProps) {
+  const workExperience = useAdminData<WorkEntry[]>("experience_override", defaultWorkExperience);
   return (
     <section className="mb-16 px-6 md:px-margin-desktop">
       <h2 className="font-headline-xl text-headline-xl text-on-surface mb-12">

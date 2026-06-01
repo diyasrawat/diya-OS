@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { FocusItem } from "@/lib/types";
-import { focusItems } from "@/lib/data/focus";
+import { focusItems as defaultFocusItems } from "@/lib/data/focus";
+import { useAdminData } from "@/hooks/useAdminData";
 
 const accentMap: Record<FocusItem["accentColor"], string> = {
   primary: "text-primary",
@@ -11,6 +12,7 @@ const accentMap: Record<FocusItem["accentColor"], string> = {
 };
 
 export default function CurrentlyBuilding() {
+  const focusItems = useAdminData<FocusItem[]>("focus_override", defaultFocusItems);
   return (
     <section className="mb-40 px-6 md:px-margin-desktop" id="system">
       <div className="flex items-end justify-between mb-12">

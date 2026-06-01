@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { projects } from "@/lib/data/projects";
+import { projects as defaultProjects } from "@/lib/data/projects";
 import { useDiyaAI } from "@/hooks/useDiyaAI";
+import { useAdminData } from "@/hooks/useAdminData";
 import { Project } from "@/lib/types";
 
 function ProjectCard({
@@ -64,6 +65,7 @@ function ProjectCard({
 }
 
 export default function FeaturedWork() {
+  const projects = useAdminData<Project[]>("projects_override", defaultProjects);
   const featured = projects.filter((p) => p.featured);
 
   return (

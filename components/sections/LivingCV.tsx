@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { timeline } from "@/lib/data/timeline";
+import { timeline as defaultTimeline } from "@/lib/data/timeline";
 import { TimelineEvent, TimelineCategory } from "@/lib/types";
+import { useAdminData } from "@/hooks/useAdminData";
+import SafeButton from "@/components/ui/SafeButton";
 
 // ── Color map ─────────────────────────────────────────────────────────────────
 
@@ -31,6 +33,7 @@ const TABS: { label: string; value: TabValue }[] = [
 // ── Component ─────────────────────────────────────────────────────────────────
 
 export default function LivingCV() {
+  const timeline = useAdminData<TimelineEvent[]>("timeline_override", defaultTimeline);
   const [activeTab, setActiveTab] = useState<TabValue>("all");
 
   const filtered =
@@ -47,7 +50,7 @@ export default function LivingCV() {
       {/* Filter tabs */}
       <div className="flex flex-wrap gap-2 mb-12">
         {TABS.map((tab) => (
-          <button
+          <SafeButton
             key={tab.value}
             onClick={() => setActiveTab(tab.value)}
             className={`px-4 py-1.5 rounded-full font-label-md text-label-md transition-all ${
@@ -57,7 +60,7 @@ export default function LivingCV() {
             }`}
           >
             {tab.label}
-          </button>
+          </SafeButton>
         ))}
       </div>
 

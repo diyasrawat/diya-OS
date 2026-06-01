@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import SafeInput from "@/components/ui/SafeInput";
+import SafeButton from "@/components/ui/SafeButton";
+import SafeTextarea from "@/components/ui/SafeTextarea";
 
 export default function Contact() {
   const [name, setName] = useState("");
@@ -75,35 +78,35 @@ export default function Contact() {
                 <p className="font-headline-lg text-headline-lg text-on-surface">
                   Message received.
                 </p>
-                <button
+                <SafeButton
                   type="button"
                   onClick={() => setSubmitted(false)}
                   className="text-primary font-label-md text-label-md hover:underline"
                 >
                   Send another
-                </button>
+                </SafeButton>
               </div>
             ) : (
               <>
-                <input
+                <SafeInput
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:ring-1 focus:ring-primary focus:outline-none text-on-surface font-mono placeholder:opacity-30"
                   placeholder="IDENTITY"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
-                <textarea
+                <SafeTextarea
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:ring-1 focus:ring-primary focus:outline-none text-on-surface font-mono placeholder:opacity-30 resize-none"
                   placeholder="MESSAGE_STRING"
                   rows={4}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                 />
-                <button
+                <SafeButton
                   type="submit"
                   className="w-full bg-primary/10 border border-primary/30 text-primary py-4 rounded-xl font-label-md text-label-md hover:bg-primary hover:text-on-primary transition-all"
                 >
                   Submit
-                </button>
+                </SafeButton>
               </>
             )}
           </form>

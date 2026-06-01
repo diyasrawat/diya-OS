@@ -36,6 +36,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} dark`}
+      data-gr-ext-installed="ignore"
     >
       <head>
         <link
@@ -43,7 +44,7 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         />
       </head>
-      <body className="bg-[#131315] text-on-surface antialiased">
+      <body className="bg-[#131315] text-on-surface antialiased" suppressHydrationWarning>
         <DiyaAIProvider>
           {children}
           <CursorGlow />
