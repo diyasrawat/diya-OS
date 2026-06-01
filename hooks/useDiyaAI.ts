@@ -6,14 +6,21 @@ import {
   useState,
   useCallback,
   useEffect,
+  useRef,
   ReactNode,
   createElement,
 } from "react";
 import { ChatMessage, Project } from "@/lib/types";
 
+const WELCOME: ChatMessage = {
+  role: "assistant",
+  content:
+    "Hi! I'm Diya AI. Ask me anything about Diya's projects, skills, or experience — or click any project card to get an instant summary.",
+};
+
 interface DiyaAIState {
   messages: ChatMessage[];
-  isLoading: boolean;
+  isStreaming: boolean;
   isPanelOpen: boolean;
   selectedProject: Project | null;
   input: string;
@@ -26,12 +33,25 @@ interface DiyaAIState {
 const DiyaAIContext = createContext<DiyaAIState | null>(null);
 
 export function DiyaAIProvider({ children }: { children: ReactNode }) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [messages, setMessages] = useState<ChatMessage[]>([WELCOME]);
+  const [isStreaming, setIsStreaming] = useState(false);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [input, setInput] = useState("");
 
+  // Refs to avoid stale closures inside sendMessage
+  const messagesRef = useRef<ChatMessage[]>([WELCOME]);
+  const selectedProjectRef = useRef<Project | null>(null);
+
+  useEffect(() => {
+    messagesRef.current = messages;
+  }, [messages]);
+
+  useEffect(() => {
+    selectedProjectRef.current = selectedProject;
+  }, [selectedProject]);
+
+  // Inject project summary when a card is clicked
   useEffect(() => {
     if (!selectedProject) return;
     const s = selectedProject.summary;
@@ -43,38 +63,64 @@ export function DiyaAIProvider({ children }: { children: ReactNode }) {
     setIsPanelOpen(true);
   }, [selectedProject]);
 
-  const sendMessage = useCallback(
-    async (userInput: string) => {
-      const userMsg: ChatMessage = { role: "user", content: userInput };
-      setMessages((prev) => [...prev, userMsg]);
-      setIsLoading(true);
-      try {
-        const res = await fetch("/api/chat", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ messages: [...messages, userMsg] }),
-        });
-        if (!res.ok) throw new Error("Request failed");
-        const data = await res.json();
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: data.message },
-        ]);
-      } catch {
-        setMessages((prev) => [
-          ...prev,
-          {
-            role: "assistant",
-            content:
-              "I ran into an issue connecting. Add an Anthropic API key to get full AI responses.",
-          },
-        ]);
-      } finally {
-        setIsLoading(false);
+  const sendMessage = useCallback(async (userInput: string) => {
+    const trimmed = userInput.trim();
+    if (!trimmed) return;
+
+    const userMsg: ChatMessage = { role: "user", content: trimmed };
+
+    // Snapshot before any state updates to avoid stale closure
+    const snapshot = [...messagesRef.current, userMsg];
+
+    // Append user message + empty assistant placeholder
+    setMessages((prev) => [
+      ...prev,
+      userMsg,
+      { role: "assistant", content: "" },
+    ]);
+    setIsStreaming(true);
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          messages: snapshot,
+          projectContext: selectedProjectRef.current,
+        }),
+      });
+
+      if (!res.ok || !res.body) {
+        throw new Error(`HTTP ${res.status}`);
       }
-    },
-    [messages]
-  );
+
+      const reader = res.body.getReader();
+      const decoder = new TextDecoder();
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value, { stream: true });
+        setMessages((prev) => {
+          const next = [...prev];
+          const last = next[next.length - 1];
+          next[next.length - 1] = { ...last, content: last.content + chunk };
+          return next;
+        });
+      }
+    } catch {
+      setMessages((prev) => {
+        const next = [...prev];
+        next[next.length - 1] = {
+          role: "assistant",
+          content: "Diya AI is unavailable right now. Please try again.",
+        };
+        return next;
+      });
+    } finally {
+      setIsStreaming(false);
+    }
+  }, []); // No deps — uses refs for latest state
 
   const selectProject = useCallback((project: Project) => {
     setSelectedProject(project);
@@ -85,7 +131,7 @@ export function DiyaAIProvider({ children }: { children: ReactNode }) {
     {
       value: {
         messages,
-        isLoading,
+        isStreaming,
         isPanelOpen,
         selectedProject,
         input,
