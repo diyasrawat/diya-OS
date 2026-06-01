@@ -46,7 +46,7 @@ export default function RecruiterModeTeaser() {
                   <span
                     className={`font-headline-lg text-headline-lg ${i === 0 ? roleColors[i] : ""}`}
                   >
-                    {role.title}
+                    {role.label}
                   </span>
                 </li>
               ))}

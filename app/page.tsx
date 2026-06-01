@@ -5,6 +5,7 @@ import GitHubIntelligence from "@/components/sections/GithubIntelligence";
 import FeaturedWork from "@/components/sections/FeaturedWork";
 import RecruiterModeTeaser from "@/components/sections/RecruiterModeTeaser";
 import LivingCV from "@/components/sections/LivingCV";
+import WorkExperience from "@/components/sections/WorkExperience";
 import Contact from "@/components/sections/Contact";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <FeaturedWork />
         <RecruiterModeTeaser />
         <LivingCV />
+        <WorkExperience heading="Experience" />
         <Contact />
       </div>
     </MainLayout>

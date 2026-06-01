@@ -3,50 +3,44 @@ import { RecruiterRole } from "@/lib/types";
 export const recruiterRoles: RecruiterRole[] = [
   {
     id: "ai-engineer",
-    title: "AI Engineer",
+    label: "AI Engineer",
     icon: "psychology",
+    headline: "Agentic workflows · LLM fine-tuning · Enterprise AI",
     description:
-      "Specialized in architecting agentic workflows and fine-tuning large language models. Expertise bridges the gap between raw compute and autonomous decision-making systems, leveraging LangGraph and Semantic Kernel for robust enterprise-grade AI solutions.",
-    coreSkills: [
-      { category: "Language", name: "Python", percent: 95 },
-      { category: "Framework", name: "PyTorch", percent: 88 },
-      { category: "Orchestration", name: "LangChain", percent: 92 },
-      { category: "Storage", name: "VectorDBs", percent: 85 },
-    ],
-    tags: ["LLMs", "Fine-Tuning", "RLHF", "Hugging Face", "Azure OpenAI", "Quantization"],
-    matchedProjectIds: ["identity-verification", "semantic-kernel"],
+      "Specialized in architecting multi-agent systems and fine-tuning large language models. Bridges raw compute and autonomous decision-making using LangGraph, Groq, and Semantic Kernel.",
+    projectIds: ["identity-verification", "semantic-kernel"],
+    skillIds: ["python", "pytorch", "langchain", "vectordbs"],
+    primaryColor: "primary",
+    tags: ["LANGGRAPH", "GROQ", "LORA", "QLORA", "AZURE AI", "HUGGING FACE"],
     insightQA: [
       {
         question: "How do you handle state management in multi-agent systems?",
         answer:
-          "I utilize LangGraph's persistent state mechanism. It allows agents to pause, reflect, and resume with full context, ensuring long-running workflows remain robust.",
+          "I use LangGraph's persistent state mechanism — it lets agents pause, reflect, and resume with full context, keeping long-running workflows robust under partial failures.",
       },
       {
         question: "Your approach to fine-tuning for specific domains?",
         answer:
-          "I prefer LoRA/QLoRA for efficiency. The focus is always on high-quality synthetic data generation and strict evaluation benchmarks using RAGas.",
+          "LoRA/QLoRA for efficiency. I focus on high-quality synthetic data generation and evaluate strictly with RAGas and task-specific benchmarks before deployment.",
       },
     ],
   },
   {
     id: "data-scientist",
-    title: "Data Scientist",
+    label: "Data Scientist",
     icon: "database",
+    headline: "Predictive modeling · Feature engineering · Data pipelines",
     description:
-      "Expertise in transforming high-dimensional noise into actionable signals. Specializing in predictive modeling, complex time-series forecasting, and architecting data pipelines for autonomous decision-making systems.",
-    coreSkills: [
-      { category: "Library", name: "Pandas", percent: 95 },
-      { category: "Numerical", name: "NumPy", percent: 88 },
-      { category: "ML", name: "Scikit-learn", percent: 92 },
-      { category: "Database", name: "SQL", percent: 85 },
-    ],
-    tags: ["PyTorch", "Tableau", "DVC", "Spark", "FastAPI", "PostgreSQL", "Docker"],
-    matchedProjectIds: ["heart-failure", "vein-detection"],
+      "Transforms high-dimensional noise into actionable signals. Specializes in predictive modeling, time-series forecasting, and idempotent data pipelines for autonomous decision systems.",
+    projectIds: ["heart-failure", "vein-detection"],
+    skillIds: ["pandas", "numpy", "sklearn", "sql"],
+    primaryColor: "secondary",
+    tags: ["FASTAPI", "SPARK", "DVC", "TABLEAU", "DOCKER", "POSTGRESQL"],
     insightQA: [
       {
         question: "How do you approach data quality issues in production?",
         answer:
-          "I build idempotent pipelines with Isolation Forest outlier detection. Null imputation strategy is always chosen based on missingness mechanism — MCAR, MAR, or MNAR.",
+          "I build idempotent pipelines with Isolation Forest outlier detection. Null imputation strategy is chosen based on missingness mechanism — MCAR, MAR, or MNAR.",
       },
       {
         question: "Preferred approach to feature engineering?",
@@ -57,23 +51,25 @@ export const recruiterRoles: RecruiterRole[] = [
   },
   {
     id: "ml-researcher",
-    title: "ML Researcher",
+    label: "ML Researcher",
     icon: "science",
+    headline: "Computer vision · Efficient fine-tuning · Research-to-production",
     description:
-      "Focused on advancing practical applications at the intersection of computer vision and natural language processing. Interested in efficient training methods and bridging research-to-production gaps.",
-    coreSkills: [
-      { category: "Framework", name: "PyTorch", percent: 90 },
-      { category: "Vision", name: "OpenCV", percent: 85 },
-      { category: "NLP", name: "Transformers", percent: 88 },
-      { category: "Training", name: "CUDA", percent: 72 },
-    ],
-    tags: ["LoRA", "RLHF", "U-Net", "Diffusion Models", "CLIP", "Attention Mechanisms"],
-    matchedProjectIds: ["vein-detection", "semantic-kernel"],
+      "Focuses on practical applications at the intersection of CV and NLP. Interested in bridging research-to-production gaps through efficient training methods like LoRA and U-Net architectures.",
+    projectIds: ["vein-detection", "semantic-kernel"],
+    skillIds: ["pytorch-vision", "opencv", "transformers", "cuda"],
+    primaryColor: "tertiary",
+    tags: ["LORA", "RLHF", "U-NET", "DIFFUSION MODELS", "CLIP", "ATTENTION"],
     insightQA: [
       {
         question: "How do you stay current with ML research?",
         answer:
-          "I track Arxiv daily, focusing on practical methods with reproducible code. I immediately test promising techniques on my current projects to validate real-world applicability.",
+          "I track Arxiv daily, prioritizing papers with reproducible code. I immediately test promising methods on current projects to validate real-world applicability.",
+      },
+      {
+        question: "How do you approach computer vision pipeline design?",
+        answer:
+          "NIR imaging + U-Net segmentation for medical applications. Domain-specific preprocessing consistently outperforms generic augmentation in low-data regimes.",
       },
     ],
   },
