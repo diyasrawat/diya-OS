@@ -32,12 +32,22 @@ export interface Skill {
   color: "primary" | "secondary" | "tertiary";
 }
 
+export type TimelineCategory =
+  | "hackathon"
+  | "certification"
+  | "milestone"
+  | "education"
+  | "publication"
+  | "award";
+
 export interface TimelineEvent {
   id: string;
-  date: string;
+  date: string;        // "MMM YYYY"
   title: string;
   description: string;
+  category: TimelineCategory;
   color: "primary" | "secondary" | "tertiary";
+  link?: string;       // optional external URL
 }
 
 export interface FocusItem {
@@ -50,16 +60,11 @@ export interface FocusItem {
 
 export interface RecruiterRole {
   id: "ai-engineer" | "data-scientist" | "ml-researcher";
-  /** Display name in sidebar + headline */
   label: string;
   icon: string;
-  /** Short one-line persona tagline */
   headline: string;
-  /** Two-sentence recruiter pitch shown under the headline */
   description: string;
-  /** Ordered project IDs — first = most relevant */
   projectIds: string[];
-  /** Ordered skill IDs referencing recruiterSkills record */
   skillIds: string[];
   primaryColor: "primary" | "secondary" | "tertiary";
   tags: string[];
