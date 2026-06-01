@@ -1,0 +1,723 @@
+<!-- Diya.OS | Recruiter Dashboard (AI Engineer) -->
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #131315;
+            color: #e4e2e4;
+            overflow-x: hidden;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .ai-pulse {
+            box-shadow: 0 0 20px rgba(173, 198, 255, 0.15);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #353437; border-radius: 10px; }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#c9c6c5",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "surface-container-highest": "#353437",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-primary-container": "#00285c",
+                        "tertiary-fixed-dim": "#c9c6c5",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#d1bdf4",
+                        "surface-container-high": "#2a2a2c",
+                        "surface-dim": "#131315",
+                        "surface-variant": "#353437",
+                        "secondary-fixed-dim": "#d1bdf4",
+                        "on-surface": "#e4e2e4",
+                        "outline-variant": "#414755",
+                        "outline": "#8b90a0",
+                        "primary-fixed": "#d8e2ff",
+                        "tertiary-fixed": "#e5e2e1",
+                        "primary-container": "#4b8eff",
+                        "on-tertiary-container": "#2a2a29",
+                        "primary": "#adc6ff",
+                        "on-secondary-fixed": "#22123f",
+                        "surface-tint": "#adc6ff",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "inverse-primary": "#005bc1",
+                        "surface": "#131315",
+                        "background": "#131315",
+                        "on-tertiary": "#313030",
+                        "on-primary-fixed-variant": "#004493",
+                        "inverse-surface": "#e4e2e4",
+                        "on-secondary": "#372855",
+                        "secondary-fixed": "#ebddff",
+                        "on-primary-fixed": "#001a41",
+                        "on-primary": "#002e69",
+                        "surface-bright": "#39393b",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "surface-container": "#1f1f21",
+                        "on-surface-variant": "#c1c6d7",
+                        "on-secondary-container": "#c3afe6",
+                        "secondary-container": "#50416f",
+                        "on-background": "#e4e2e4",
+                        "surface-container-lowest": "#0e0e10",
+                        "inverse-on-surface": "#303032",
+                        "on-error": "#690005",
+                        "tertiary-container": "#929090",
+                        "on-secondary-fixed-variant": "#4e3f6d",
+                        "surface-container-low": "#1b1b1d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Geist"],
+                        "label-md": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Geist"],
+                        "headline-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="font-body-md text-body-md bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10">
+<nav class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter">Diya.OS</div>
+<div class="hidden md:flex items-center gap-10">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Projects</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Experience</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Personal</a>
+</div>
+<div class="flex items-center gap-6">
+<button class="bg-primary/10 text-primary px-6 py-2 rounded-full border border-primary/20 font-label-md text-label-md hover:bg-primary/20 transition-all">Download CV</button>
+<span class="material-symbols-outlined text-primary text-3xl">account_circle</span>
+</div>
+</nav>
+</header>
+<!-- Sidebar & Main Content Wrapper -->
+<div class="flex min-h-screen pt-20">
+<!-- SideNavBar -->
+<aside class="fixed left-0 h-screen w-64 pt-8 bg-surface-container-low/50 backdrop-blur-2xl border-r border-white/10 flex flex-col gap-unit p-4 z-40">
+<div class="px-4 mb-8">
+<div class="flex items-center gap-3 mb-2">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="A professional digital avatar of a young female AI engineer with a modern, tech-focused aesthetic. She has subtle glowing circuit patterns on her skin, representing her digital twin persona. The background is a dark, sophisticated workspace with soft blue holographic displays. The lighting is cinematic and futuristic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeyYU7Ax9pFMdU262SisiEtYBdl7Er4EcDbz6m_YnnuiXD-3gCSMVHf5TgFiR5EkYV1HGsv0RvM1WJApIico03ZUZW2LM3vMtT1nG9Ff72FG6gf7aOcRxgq5qsUsQZI2toub9gF0Pjxc_aSkTRrF_cMiR35j0WsREL6AXUmLBBUWLysuKt9xN-D71As9joOuwe1ibwZvW7PGvs_osLVjI9t3PelT9PqtFgzvE4qc13lAq0msA_hSsIok3aVkUt1R5NJFeZ7hvqfsY"/>
+</div>
+<div>
+<div class="font-label-md text-label-md text-primary font-bold">Diya Rawat</div>
+<div class="text-[10px] text-on-surface-variant uppercase tracking-widest">Recruiter Dashboard</div>
+</div>
+</div>
+<div class="h-[1px] w-full bg-white/5 my-4"></div>
+<div class="text-[11px] font-bold text-on-surface-variant uppercase tracking-widest px-2 mb-2">Candidate Roles</div>
+</div>
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary border-r-4 border-primary transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<span class="font-label-md text-label-md">AI Engineer</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">database</span>
+<span class="font-label-md text-label-md">Data Scientist</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-white/5 hover:text-on-surface transition-all" href="#">
+<span class="material-symbols-outlined">science</span>
+<span class="font-label-md text-label-md">ML Researcher</span>
+</a>
+</nav>
+<div class="mt-auto pb-24 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined">lan</span>
+<span class="font-label-md text-label-md">System Status</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<button class="mt-4 w-full bg-primary text-on-primary font-label-md text-label-md py-3 rounded-xl ai-pulse transition-all active:scale-95">Contact Diya</button>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 w-full px-margin-desktop py-12">
+<!-- Hero Header -->
+<section class="mb-16">
+<div class="flex items-center gap-3 mb-4">
+<span class="w-2 h-2 rounded-full bg-primary ai-pulse"></span>
+<span class="font-label-md text-label-md text-primary tracking-widest uppercase">System Profile: Active</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-6">Candidate Persona:<br/><span class="text-primary">AI Engineer</span></h1>
+<p class="max-w-3xl font-body-lg text-body-lg text-on-surface-variant">
+                    Specialized in architecting agentic workflows and fine-tuning large language models. Expertise bridges the gap between raw compute and autonomous decision-making systems, leveraging LangGraph and Semantic Kernel for robust enterprise-grade AI solutions.
+                </p>
+</section>
+<!-- Bento Grid Content -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Core Competencies (Bento Large) -->
+<div class="col-span-12 lg:col-span-7 glass-card rounded-3xl p-8">
+<div class="flex justify-between items-center mb-8">
+<h3 class="font-headline-lg text-headline-lg text-on-surface">Core Competencies</h3>
+<span class="material-symbols-outlined text-primary">analytics</span>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+<div class="flex flex-col gap-2">
+<span class="text-[10px] uppercase tracking-tighter text-on-surface-variant">Language</span>
+<span class="font-label-md text-label-md">Python</span>
+<div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[95%]"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-[10px] uppercase tracking-tighter text-on-surface-variant">Framework</span>
+<span class="font-label-md text-label-md">PyTorch</span>
+<div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[88%]"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-[10px] uppercase tracking-tighter text-on-surface-variant">Orchestration</span>
+<span class="font-label-md text-label-md">LangChain</span>
+<div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[92%]"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-[10px] uppercase tracking-tighter text-on-surface-variant">Storage</span>
+<span class="font-label-md text-label-md">VectorDBs</span>
+<div class="w-full h-1 bg-white/10 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-12 flex flex-wrap gap-3">
+<span class="px-4 py-2 bg-surface-container-highest rounded-full text-[12px] font-medium border border-white/5">LLMs</span>
+<span class="px-4 py-2 bg-surface-container-highest rounded-full text-[12px] font-medium border border-white/5">Fine-Tuning</span>
+<span class="px-4 py-2 bg-surface-container-highest rounded-full text-[12px] font-medium border border-white/5">RLHF</span>
+<span class="px-4 py-2 bg-surface-container-highest rounded-full text-[12px] font-medium border border-white/5">Hugging Face</span>
+<span class="px-4 py-2 bg-surface-container-highest rounded-full text-[12px] font-medium border border-white/5">Azure OpenAI</span>
+<span class="px-4 py-2 bg-surface-container-highest rounded-full text-[12px] font-medium border border-white/5">Quantization</span>
+</div>
+</div>
+<!-- Interview Insights (Bento Tall) -->
+<div class="col-span-12 lg:col-span-5 glass-card rounded-3xl p-8 flex flex-col">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<h3 class="font-headline-lg text-headline-lg text-on-surface">AI Insights</h3>
+</div>
+<div class="flex-grow space-y-6">
+<div class="flex flex-col gap-3">
+<div class="self-end bg-surface-container-high px-4 py-3 rounded-2xl rounded-tr-none text-label-md max-w-[85%] border border-white/5">
+                                How do you handle state management in multi-agent systems?
+                            </div>
+<div class="self-start bg-primary/10 border border-primary/20 px-4 py-3 rounded-2xl rounded-tl-none text-label-md max-w-[90%] text-primary">
+                                "I utilize LangGraph's persistent state mechanism. It allows agents to pause, reflect, and resume with full context, ensuring long-running workflows remain robust."
+                            </div>
+</div>
+<div class="flex flex-col gap-3">
+<div class="self-end bg-surface-container-high px-4 py-3 rounded-2xl rounded-tr-none text-label-md max-w-[85%] border border-white/5">
+                                Your approach to fine-tuning for specific domains?
+                            </div>
+<div class="self-start bg-primary/10 border border-primary/20 px-4 py-3 rounded-2xl rounded-tl-none text-label-md max-w-[90%] text-primary">
+                                "I prefer LoRA/QLoRA for efficiency. The focus is always on high-quality synthetic data generation and strict evaluation benchmarks using RAGas."
+                            </div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-white/5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+<span class="text-[12px] text-on-surface-variant font-medium">Digital Twin Live</span>
+</div>
+<button class="text-primary font-label-md text-label-md flex items-center gap-2">Ask Question <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+</div>
+<!-- Featured Projects (Grid Bottom) -->
+<div class="col-span-12 grid grid-cols-1 md:grid-cols-2 gap-gutter mt-4">
+<!-- Project 1 -->
+<div class="glass-card rounded-3xl overflow-hidden group">
+<div class="h-64 overflow-hidden">
+<img alt="Identity Verification Project" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A futuristic digital interface showing complex network nodes and biometric scanning patterns. The aesthetic is deep indigo and electric blue, with floating glass-like panels displaying real-time data streams. The mood is secure, high-tech, and clinical, representing an identity verification AI agent." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjNoVY8ZaolxxkEEYeyurRrL1SkFa_EwJsGF5RHTQEVKlyurzlD9X2kphFgIqlaiAAiQREx1TiHyjARWhgbBnw_s8mSVm0PVw0wlN-GShFQwzcDIHXRwXDoCbZIkaRXC-6paYMkYe5OgnHMlPwO3MiES13mKAy-UjClq5Bt9nz8sUE2jl3n8SyfmqLFqNuLhstBfBDe0Dw2w-hNPqUvasEKBU5PQuIuirLV2UNP4BD18brOlMZiETSpHM5USGe61YN4OpBxMjaeCk"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-headline-lg text-headline-lg">Identity Verification Agent</h4>
+<span class="material-symbols-outlined text-primary-container">open_in_new</span>
+</div>
+<p class="text-on-surface-variant mb-6 font-body-md text-body-md">
+                                An autonomous multi-agent system built with LangGraph for secure, multi-factor identity verification and risk assessment in fintech.
+                            </p>
+<div class="flex gap-2">
+<span class="text-[10px] font-bold px-3 py-1 bg-white/5 rounded border border-white/10 text-on-surface-variant">LANGGRAPH</span>
+<span class="text-[10px] font-bold px-3 py-1 bg-white/5 rounded border border-white/10 text-on-surface-variant">PYTHON</span>
+<span class="text-[10px] font-bold px-3 py-1 bg-white/5 rounded border border-white/10 text-on-surface-variant">AZURE AI</span>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="glass-card rounded-3xl overflow-hidden group">
+<div class="h-64 overflow-hidden">
+<img alt="Semantic Kernel Fine-Tuner" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A sophisticated data visualization of neural network weights and gradients. Glowing filaments of light connect floating data points in a dark, volumetric 3D space. The color palette features soft lavender and deep primary blue. It conveys the intricate process of fine-tuning an AI model for enterprise semantic understanding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBB9UNpZHpFZLxDLKKiX3deO7HdPYEUgcx1OvuH8SQX7G8NTYCexKVYBLRH0H2EzsN9F3Sos7mHZJGu5LgauOnMjTA477RCoOKBB5YuTcqWfMdE3N9GMT11GEGdqK9DJlnMZT-42dmoByWtnwV6PuRN9_5Eifbvg9drCOjpxNVemdxDevQWfjlsm1RaY4z4sAqMZiYG2VPIECGt9Dpu7xKnz8Q7d04gEc5nJsxPbaK92l76nMCxOjwvsz8q1H00PAVBt3U5nL1l7Og"/>
+</div>
+<div class="p-8">
+<div class="flex justify-between items-start mb-4">
+<h4 class="font-headline-lg text-headline-lg">Semantic Kernel Fine-Tuner</h4>
+<span class="material-symbols-outlined text-primary-container">open_in_new</span>
+</div>
+<p class="text-on-surface-variant mb-6 font-body-md text-body-md">
+                                Enterprise-level tool for automated fine-tuning of SLMs (Small Language Models) for edge deployment, integrated with Microsoft Semantic Kernel.
+                            </p>
+<div class="flex gap-2">
+<span class="text-[10px] font-bold px-3 py-1 bg-white/5 rounded border border-white/10 text-on-surface-variant">PYTORCH</span>
+<span class="text-[10px] font-bold px-3 py-1 bg-white/5 rounded border border-white/10 text-on-surface-variant">SEMANTIC KERNEL</span>
+<span class="text-[10px] font-bold px-3 py-1 bg-white/5 rounded border border-white/10 text-on-surface-variant">QLORA</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="mt-20 bg-surface border-t border-white/10">
+<div class="flex flex-col md:flex-row justify-between items-center px-margin-desktop py-8 max-w-container-max mx-auto">
+<div class="font-body-md text-body-md text-primary mb-4 md:mb-0">Diya.OS</div>
+<div class="text-on-surface-variant font-label-md text-label-md mb-4 md:mb-0">
+                © 2024 Diya Rawat. Powered by Diya.OS
+            </div>
+<div class="flex gap-8">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">System Logs</a>
+</div>
+</div>
+</footer>
+<script>
+        // Simple interaction: Update progress bars on scroll
+        window.addEventListener('scroll', () => {
+            const bars = document.querySelectorAll('.bg-primary.h-full');
+            bars.forEach(bar => {
+                const rect = bar.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    bar.style.transition = 'width 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                    // Re-triggering width if needed, but CSS already handles initial
+                }
+            });
+        });
+
+        // Artificial Cursor effect for the AI chat
+        const cursors = document.querySelectorAll('.ai-pulse');
+        setInterval(() => {
+            cursors.forEach(c => {
+                c.style.opacity = c.style.opacity === '0.5' ? '1' : '0.5';
+            });
+        }, 1500);
+    </script>
+</body></html>
+
+<!-- Diya.OS | Recruiter Dashboard (Data Scientist) -->
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Diya.OS | Data Scientist Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Geist:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#c9c6c5",
+                        "on-tertiary-fixed-variant": "#474646",
+                        "surface-container-highest": "#353437",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-primary-container": "#00285c",
+                        "tertiary-fixed-dim": "#c9c6c5",
+                        "on-error-container": "#ffdad6",
+                        "secondary": "#d1bdf4",
+                        "surface-container-high": "#2a2a2c",
+                        "surface-dim": "#131315",
+                        "surface-variant": "#353437",
+                        "secondary-fixed-dim": "#d1bdf4",
+                        "on-surface": "#e4e2e4",
+                        "outline-variant": "#414755",
+                        "outline": "#8b90a0",
+                        "primary-fixed": "#d8e2ff",
+                        "tertiary-fixed": "#e5e2e1",
+                        "primary-container": "#4b8eff",
+                        "on-tertiary-container": "#2a2a29",
+                        "primary": "#adc6ff",
+                        "on-secondary-fixed": "#22123f",
+                        "surface-tint": "#adc6ff",
+                        "on-tertiary-fixed": "#1c1b1b",
+                        "inverse-primary": "#005bc1",
+                        "surface": "#131315",
+                        "background": "#131315",
+                        "on-tertiary": "#313030",
+                        "on-primary-fixed-variant": "#004493",
+                        "inverse-surface": "#e4e2e4",
+                        "on-secondary": "#372855",
+                        "secondary-fixed": "#ebddff",
+                        "on-primary-fixed": "#001a41",
+                        "on-primary": "#002e69",
+                        "surface-bright": "#39393b",
+                        "error-container": "#93000a",
+                        "error": "#ffb4ab",
+                        "surface-container": "#1f1f21",
+                        "on-surface-variant": "#c1c6d7",
+                        "on-secondary-container": "#c3afe6",
+                        "secondary-container": "#50416f",
+                        "on-background": "#e4e2e4",
+                        "surface-container-lowest": "#0e0e10",
+                        "inverse-on-surface": "#303032",
+                        "on-error": "#690005",
+                        "tertiary-container": "#929090",
+                        "on-secondary-fixed-variant": "#4e3f6d",
+                        "surface-container-low": "#1b1b1d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Geist"],
+                        "label-md": ["Geist"],
+                        "display-lg": ["Geist"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Geist"],
+                        "headline-lg": ["Geist"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "display-lg": ["72px", {"lineHeight": "80px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #131315;
+            color: #e4e2e4;
+            overflow-x: hidden;
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glow-primary {
+            box-shadow: 0 0 20px rgba(173, 198, 255, 0.15);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(173, 198, 255, 0.2);
+            border-radius: 10px;
+        }
+        .chart-bar {
+            transition: height 1s ease-out;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md selection:bg-primary/30">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-white/10">
+<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-lg text-headline-lg font-bold text-primary tracking-tighter">Diya.OS</div>
+<div class="hidden md:flex gap-8 items-center">
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Home</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Projects</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Experience</a>
+<a class="text-on-surface-variant font-medium hover:text-primary transition-colors duration-300" href="#">Personal</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-primary text-on-primary font-label-md text-label-md px-6 py-2 rounded-full hover:opacity-90 transition-all active:scale-95">Download CV</button>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</div>
+</div>
+</nav>
+<div class="flex pt-20 h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col gap-unit h-full p-4 fixed left-0 w-64 bg-surface-container-low/50 backdrop-blur-2xl border-r border-white/10 z-40">
+<div class="px-4 py-6">
+<div class="flex items-center gap-3 mb-6">
+<img alt="Diya Rawat Digital Twin" class="w-10 h-10 rounded-full border border-primary/30" data-alt="A professional headshot of a young South Asian woman with a confident expression, set against a dark, minimalist studio background with subtle cool blue rim lighting. The style is high-end editorial, matching a sophisticated AI operating system aesthetic with sharp focus and cinematic depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWdSmHn72eGHlXZJF_qeLBtpYs9TYSQuo-Uho3rAg9fpFn29ca4M_MByaprf19OHk1bOgi_dlbocI_Sq4JfBETYFRCIvxA3AHmKCdNMmpjr8y-cXvCsEppS2Lw-5sJyl7jdnBwdHmi5R976Rbo--1d1vLbcizMtRZEOPTzRYm4H6SgtU61yeKd5CqsSHmcDw-X2e8TO9XFGy0WlmcUfBCnB10hqF9CJoMrDgNdIZPtgBSJzM3-0tp2ronjqAnOCGlkK7rwCH_3fUM"/>
+<div>
+<h3 class="font-label-md text-label-md text-on-surface font-bold">Candidate Roles</h3>
+<p class="text-[10px] text-on-surface-variant tracking-widest uppercase">Recruiter Dashboard</p>
+</div>
+</div>
+<div class="space-y-2">
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-label-md text-label-md">AI Engineer</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-primary/10 text-primary border-r-4 border-primary transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">database</span>
+<span class="font-label-md text-label-md">Data Scientist</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-white/5 transition-all" href="#">
+<span class="material-symbols-outlined">science</span>
+<span class="font-label-md text-label-md">ML Researcher</span>
+</a>
+</div>
+</div>
+<div class="mt-auto px-4 pb-8 space-y-4">
+<button class="w-full bg-surface-container-highest text-on-surface font-label-md text-label-md py-3 rounded-xl border border-white/5 hover:bg-white/10 transition-all">Contact Diya</button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 p-2 text-[12px] text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">lan</span> System Status
+                    </a>
+<a class="flex items-center gap-3 p-2 text-[12px] text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined text-sm">settings</span> Settings
+                    </a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 ml-0 md:ml-64 overflow-y-auto custom-scrollbar">
+<div class="max-w-5xl mx-auto px-8 py-12 space-y-12">
+<!-- Role Header -->
+<header class="space-y-4">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="font-label-md text-[12px] tracking-widest uppercase">System Profile Active</span>
+</div>
+<h1 class="font-headline-xl text-headline-xl text-on-surface">Candidate Persona: <span class="text-primary">Data Scientist</span></h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+                        Expertise in transforming high-dimensional noise into actionable signals. Specializing in <span class="text-on-surface font-medium">predictive modeling</span>, complex <span class="text-on-surface font-medium">time-series forecasting</span>, and architecting data pipelines for autonomous decision-making systems.
+                    </p>
+</header>
+<!-- Statistical Stack & Skills -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Skills Chart -->
+<div class="lg:col-span-2 glass p-8 rounded-3xl space-y-6 glow-primary">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-lg text-headline-lg">Statistical Stack</h2>
+<span class="text-on-surface-variant text-[12px] font-mono">CORE_PROFICIENCY_V2</span>
+</div>
+<div class="grid grid-cols-4 gap-4 items-end h-48">
+<div class="flex flex-col items-center gap-3 h-full justify-end">
+<div class="w-full bg-primary/40 rounded-t-lg chart-bar" style="height: 95%;"></div>
+<span class="font-label-md text-label-md text-on-surface-variant">Pandas</span>
+</div>
+<div class="flex flex-col items-center gap-3 h-full justify-end">
+<div class="w-full bg-primary/30 rounded-t-lg chart-bar" style="height: 88%;"></div>
+<span class="font-label-md text-label-md text-on-surface-variant">NumPy</span>
+</div>
+<div class="flex flex-col items-center gap-3 h-full justify-end">
+<div class="w-full bg-primary/20 rounded-t-lg chart-bar" style="height: 92%;"></div>
+<span class="font-label-md text-label-md text-on-surface-variant">Scikit-learn</span>
+</div>
+<div class="flex flex-col items-center gap-3 h-full justify-end">
+<div class="w-full bg-primary/10 rounded-t-lg chart-bar" style="height: 85%;"></div>
+<span class="font-label-md text-label-md text-on-surface-variant">SQL</span>
+</div>
+</div>
+</div>
+<!-- Tech Tags -->
+<div class="glass p-8 rounded-3xl flex flex-col justify-between">
+<h3 class="font-label-md text-label-md text-primary tracking-widest uppercase mb-4">Extended Toolset</h3>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[12px] rounded-full border border-white/5 hover:border-primary/40 hover:text-on-surface transition-all cursor-default">PyTorch</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[12px] rounded-full border border-white/5 hover:border-primary/40 hover:text-on-surface transition-all cursor-default">Tableau</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[12px] rounded-full border border-white/5 hover:border-primary/40 hover:text-on-surface transition-all cursor-default">DVC</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[12px] rounded-full border border-white/5 hover:border-primary/40 hover:text-on-surface transition-all cursor-default">Spark</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[12px] rounded-full border border-white/5 hover:border-primary/40 hover:text-on-surface transition-all cursor-default">FastAPI</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[12px] rounded-full border border-white/5 hover:border-primary/40 hover:text-on-surface transition-all cursor-default">PostgreSQL</span>
+<span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-[12px] rounded-full border border-white/5 hover:border-primary/40 hover:text-on-surface transition-all cursor-default">Docker</span>
+</div>
+<div class="mt-8 pt-6 border-t border-white/5">
+<p class="text-[12px] text-on-surface-variant italic">"A mathematician by training, a software engineer by practice, and a storyteller by necessity."</p>
+</div>
+</div>
+</section>
+<!-- Matched Projects (Bento) -->
+<section class="space-y-6">
+<div class="flex justify-between items-center">
+<h2 class="font-headline-lg text-headline-lg">Matched Projects</h2>
+<button class="text-primary font-label-md text-label-md hover:underline flex items-center gap-2">View Portfolio <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Project Card 1 -->
+<div class="glass group relative overflow-hidden rounded-3xl p-8 hover:bg-white/[0.05] transition-all duration-500">
+<div class="relative z-10 space-y-4">
+<span class="material-symbols-outlined text-primary text-4xl">neurology</span>
+<h3 class="font-headline-lg text-headline-lg">Neural Forecast Engine</h3>
+<p class="text-on-surface-variant font-body-md">Hybrid LSTM-Transformer architecture for high-frequency market volatility prediction. Achieved 14% improvement over baseline models.</p>
+<div class="flex gap-4 pt-4">
+<span class="text-[12px] font-mono text-primary">PYTHON</span>
+<span class="text-[12px] font-mono text-primary">TENSORFLOW</span>
+<span class="text-[12px] font-mono text-primary">AWS</span>
+</div>
+</div>
+<div class="absolute -right-20 -bottom-20 w-64 h-64 bg-primary/5 rounded-full blur-3xl group-hover:bg-primary/10 transition-all duration-500"></div>
+</div>
+<!-- Project Card 2 -->
+<div class="glass group relative overflow-hidden rounded-3xl p-8 hover:bg-white/[0.05] transition-all duration-500">
+<div class="relative z-10 space-y-4">
+<span class="material-symbols-outlined text-secondary text-4xl">account_tree</span>
+<h3 class="font-headline-lg text-headline-lg">Distributed RAG Protocol</h3>
+<p class="text-on-surface-variant font-body-md">Optimized vector retrieval for large-scale enterprise documentation using LangChain and Pinecone. Reduced query latency by 45%.</p>
+<div class="flex gap-4 pt-4">
+<span class="text-[12px] font-mono text-secondary">VECTOR_DB</span>
+<span class="text-[12px] font-mono text-secondary">LANGCHAIN</span>
+<span class="text-[12px] font-mono text-secondary">PYTHON</span>
+</div>
+</div>
+<div class="absolute -right-20 -bottom-20 w-64 h-64 bg-secondary/5 rounded-full blur-3xl group-hover:bg-secondary/10 transition-all duration-500"></div>
+</div>
+</div>
+</section>
+<!-- Analytics Focus -->
+<section class="glass rounded-3xl overflow-hidden">
+<div class="p-8 border-b border-white/5 flex justify-between items-center bg-white/[0.01]">
+<div>
+<h2 class="font-headline-lg text-headline-lg">Analytics Focus</h2>
+<p class="text-on-surface-variant font-label-md">Methodology: Cleansing &amp; Feature Engineering</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">analytics</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2">
+<div class="p-8 border-r border-white/5 space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">cleaning_services</span>
+</div>
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile">Automated Cleansing</h4>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                                Implementation of robust outlier detection using Isolation Forests and custom heuristic filters. Diya prioritizes data integrity by building idempotent pipelines that ensure source-to-sink consistency.
+                            </p>
+<ul class="space-y-2 text-on-surface-variant text-label-md">
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Null Imputation Strategies</li>
+<li class="flex items-center gap-2"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Skewness Correction (Log/Box-Cox)</li>
+</ul>
+</div>
+<div class="p-8 space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">construction</span>
+</div>
+<h4 class="font-headline-lg-mobile text-headline-lg-mobile">Feature Engineering</h4>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                                Utilizing Domain-Driven Design to derive high-signal features. Expert in Target Encoding, polynomial feature generation, and PCA for dimensionality reduction in high-cardinality datasets.
+                            </p>
+<div class="h-20 flex items-end gap-1 overflow-hidden">
+<!-- Sparkline-like decorative element -->
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[30%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[50%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[40%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[70%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[90%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[60%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[80%]"></div>
+<div class="flex-1 bg-primary/20 rounded-t-sm h-[40%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Command Input Placeholder -->
+<div class="relative max-w-2xl mx-auto py-12">
+<div class="glass flex items-center px-6 py-4 rounded-full border-primary/20 glow-primary">
+<span class="material-symbols-outlined text-primary mr-4">terminal</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-surface w-full placeholder:text-on-surface-variant/50" placeholder="Query Diya's dataset experience..." type="text"/>
+<div class="w-2 h-5 bg-primary animate-[pulse_1s_infinite] ml-2"></div>
+</div>
+</div>
+<footer class="w-full py-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center opacity-60">
+<p class="font-label-md text-label-md text-on-surface-variant">© 2024 Diya Rawat. Powered by Diya.OS</p>
+<div class="flex gap-6 mt-4 md:mt-0">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">System Logs</a>
+</div>
+</footer>
+</div>
+</main>
+</div>
+<script>
+        // Micro-interaction for the chart bars on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const bars = document.querySelectorAll('.chart-bar');
+            bars.forEach(bar => {
+                const targetHeight = bar.style.height;
+                bar.style.height = '0';
+                setTimeout(() => {
+                    bar.style.height = targetHeight;
+                }, 200);
+            });
+        });
+    </script>
+</body></html>
